@@ -1,11 +1,13 @@
 export const COLORS = {
-  PRIMARY: "#22D3EE",
-  SECONDARY: "#FBBF24",
-  BACKGROUND: "#0B1326",
-  SURFACE: "#171f33",
-  SURFACE_HIGH: "#222a3d",
-  TEXT_PRIMARY: "#dae2fd",
-  TEXT_SECONDARY: "#bbc9cd",
-  BORDER: "#859397",
-  ERROR: "#ffb4ab",
-};
+  PRIMARY: '#22D3EE',
+  SECONDARY: '#FBBF24',
+  BACKGROUND: '#0B1326',
+  SURFACE_CONTAINER_HIGH: '#BBC9CD',
+  SURFACE: '#171f33',
+  SURFACE_HIGH: '#222a3d',
+  TEXT_PRIMARY: '#dae2fd',
+  TEXT_SECONDARY: '#bbc9cd',
+  BORDER: '#859397',
+  ERROR: '#ffb4ab',
+  WHITE: '#FFFF',
+}
