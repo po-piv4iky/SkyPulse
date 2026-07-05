@@ -46,21 +46,21 @@ export default function Header() {
 const styles = StyleSheet.create({
   headerContainer: {
     paddingTop: 40,
+    paddingBottom: THEME.spacing.SM,
     paddingHorizontal: THEME.spacing.MD,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    color: THEME.colors.PRIMARY,
   },
 })
 
 // const styles = StyleSheet.create({
 //   headerContainer: {
 //     paddingTop: 40,
-//     paddingBottom: THEME.spacing.SM,
 //     paddingHorizontal: THEME.spacing.MD,
-//     alignItems: 'center',
-//     justifyContent: 'space-between',
 //     flexDirection: 'row',
-//     color: THEME.colors.PRIMARY,
+//     justifyContent: 'space-between',
+//     alignItems: 'center',
 //   },
 // })
