@@ -1,5 +1,11 @@
 import { Ionicons } from '@expo/vector-icons'
 
+export type Tab = {
+  name: string
+  title: string
+  icon: React.ComponentProps<typeof Ionicons>['name']
+}
+
 export const tabs = [
   {
     name: 'index',
@@ -21,8 +27,4 @@ export const tabs = [
     title: 'Settings',
     icon: 'settings',
   },
-] as const satisfies {
-  name: string
-  title: string
-  icon: React.ComponentProps<typeof Ionicons>['name']
-}[]
+] as const satisfies Tab[]
