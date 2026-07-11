@@ -1,39 +1,22 @@
-import Icon from '@/shared/components/Icon/Icon'
-import StyledText from '@/shared/components/StyledText/StyledTex'
 import { THEME } from '@/shared/theme'
 import { Tabs } from 'expo-router'
-import { Pressable, StyleSheet, View } from 'react-native'
-import Animated, { useAnimatedStyle, withTiming } from 'react-native-reanimated'
+import { StyleSheet, View } from 'react-native'
 import { tabs } from '../tabs'
+import TabItem from './TabItem'
 
 type CustomTabBarProps = Parameters<
   NonNullable<React.ComponentProps<typeof Tabs>['tabBar']>
 >[0]
 
-export default function CustomTabBar({
-  state,
-  descriptors,
-  navigation,
-}: CustomTabBarProps) {
+export default function CustomTabBar({ state, navigation }: CustomTabBarProps) {
   return (
     <View style={styles.container}>
-      {state.routes.map((route, index) => {
-        const focused = state.index === index
-        const animatedStyle = useAnimatedStyle(() => {
-          return {
-            transform: [
-              {
-                scale: withTiming(focused ? 1.08 : 1, {
-                  duration: 180,
-                }),
-              },
-            ],
-          }
-        })
-        const tab = tabs.find((item) => item.name === route.name)
-        if (!tab) {
-          return null
-        }
+      {tabs.map((tab) => {
+        const route = state.routes.find((r) => r.name === tab.name)
+
+        if (!route) return null
+
+        const focused = state.index === state.routes.findIndex((r) => r.name === tab.name)
 
         const onPress = () => {
           const event = navigation.emit({
@@ -55,17 +38,13 @@ export default function CustomTabBar({
         }
 
         return (
-          <Pressable key={route.key} onPress={onPress} onLongPress={onLongPress}>
-            <Animated.View
-              style={[styles.item, focused && styles.activeItem, animatedStyle]}
-            >
-              <Icon
-                name={tab.icon}
-                color={focused ? '#fff' : THEME.colors.TEXT_PRIMARY}
-              />
-              <StyledText>{tab.title}</StyledText>
-            </Animated.View>
-          </Pressable>
+          <TabItem
+            key={route.key}
+            tab={tab}
+            focused={focused}
+            onPress={onPress}
+            onLongPress={onLongPress}
+          />
         )
       })}
     </View>
@@ -74,22 +53,32 @@ export default function CustomTabBar({
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    position: 'absolute',
+
+    left: 16,
+    right: 16,
+    bottom: 20,
+
+    height: 68,
+
     flexDirection: 'row',
-    borderRadius: 20,
-    backgroundColor: THEME.colors.BG_SECONDARY,
-  },
-  item: {
+    justifyContent: 'space-around',
     alignItems: 'center',
-    justifyContent: 'center',
 
-    paddingHorizontal: 16,
-    paddingVertical: 8,
+    borderRadius: 22,
 
-    borderRadius: 18,
-  },
-  activeItem: {
-    backgroundColor: THEME.colors.BUTTON_SECONDARY,
+    paddingHorizontal: 12,
+
+    backgroundColor: THEME.colors.BG_SECONDARY,
+
+    shadowColor: '#000',
+    shadowOpacity: 0.12,
+    shadowRadius: 12,
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+
+    elevation: 10,
   },
 })

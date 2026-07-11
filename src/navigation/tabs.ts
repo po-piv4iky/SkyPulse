@@ -1,30 +1,34 @@
-import { Ionicons } from '@expo/vector-icons'
-
-export type Tab = {
-  name: string
-  title: string
-  icon: React.ComponentProps<typeof Ionicons>['name']
-}
-
-export const tabs = [
-  {
+export const tabsMap = {
+  index: {
     name: 'index',
     title: 'Home',
     icon: 'home',
   },
-  {
+  forecast: {
     name: 'forecast',
     title: 'Forecast',
     icon: 'cloud',
   },
-  {
+  save: {
     name: 'save',
     title: 'Saved',
-    icon: 'save',
+    icon: 'bookmark',
   },
-  {
+  settings: {
     name: 'settings',
     title: 'Settings',
     icon: 'settings',
   },
-] as const satisfies Tab[]
+} as const
+
+export const tabs = Object.values(tabsMap)
+// Результат:
+// [
+//   { name: 'index', title: 'Home', icon: 'home' },
+//   { name: 'forecast', title: 'Forecast', icon: 'cloud' },
+//   { name: 'save', title: 'Saved', icon: 'save' },
+//   { name: 'settings', title: 'Settings', icon: 'settings' },
+// ]
+
+export type Tab = (typeof tabs)[number]
+export type TabName = keyof typeof tabsMap

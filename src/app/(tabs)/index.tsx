@@ -1,19 +1,16 @@
 import GradientBackground from '@/shared/components/GradientBackground/GradientBackground'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text } from 'react-native'
 
 export default function Home() {
   return (
-    <View style={styles.container}>
-      <GradientBackground>
-        <Text>Home</Text>
-      </GradientBackground>
-    </View>
+    <GradientBackground style={styles.container}>
+      <Text>Home</Text>
+    </GradientBackground>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },

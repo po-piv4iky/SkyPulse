@@ -1,16 +1,16 @@
-import { StyleSheet, Text, View } from 'react-native'
+import GradientBackground from '@/shared/components/GradientBackground/GradientBackground'
+import { StyleSheet, Text } from 'react-native'
 
 export default function Forecast() {
   return (
-    <View style={styles.container}>
-      <Text>forecast</Text>
-    </View>
+    <GradientBackground style={styles.container}>
+      <Text>Forecast</Text>
+    </GradientBackground>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },

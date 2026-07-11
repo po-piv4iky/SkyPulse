@@ -1,22 +1,17 @@
-import { LinearGradient } from 'expo-linear-gradient'
-import { ReactNode } from 'react'
-import { StyleSheet, ViewProps } from 'react-native'
+import { THEME } from '@/shared/theme'
+import { LinearGradient, LinearGradientProps } from 'expo-linear-gradient'
+import { StyleSheet } from 'react-native'
 
-interface GradientBackgroundProps extends ViewProps {
-  children: ReactNode
-  colors?: readonly [string, string, ...string[]]
-  start?: { x: number; y: number }
-  end?: { x: number; y: number }
+type GradientBackgroundProps = Omit<LinearGradientProps, 'colors'> & {
+  colors?: LinearGradientProps['colors']
 }
 
-const DEFAULT_GRADIENT = ['#233453', '#10121A'] as const
-
 export default function GradientBackground({
-  children,
-  colors = DEFAULT_GRADIENT,
+  colors = THEME.gradients.BACKGROUND,
   start = { x: 0.5, y: 0.5 },
   end = { x: 0.5, y: 1 },
   style,
+  children,
   ...props
 }: GradientBackgroundProps) {
   return (
@@ -24,7 +19,7 @@ export default function GradientBackground({
       colors={colors}
       start={start}
       end={end}
-      style={[styles.gradient, style]}
+      style={[styles.container, style]}
       {...props}
     >
       {children}
@@ -33,8 +28,7 @@ export default function GradientBackground({
 }
 
 const styles = StyleSheet.create({
-  gradient: {
+  container: {
     flex: 1,
-    width: '100%',
   },
 })
