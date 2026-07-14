@@ -1,8 +1,14 @@
 import Icon from '@/shared/components/Icon/Icon'
 import StyledText from '@/shared/components/StyledText/StyledTex'
 import { THEME } from '@/shared/theme'
+import { useEffect } from 'react'
 import { Pressable, StyleSheet } from 'react-native'
-import Animated, { useAnimatedStyle, withTiming } from 'react-native-reanimated'
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+  withTiming,
+} from 'react-native-reanimated'
 import { Tab } from '../tabs'
 
 interface TabItemProps {
@@ -13,14 +19,31 @@ interface TabItemProps {
 }
 
 export default function TabItem({ tab, focused, onPress, onLongPress }: TabItemProps) {
+  const scale = useSharedValue(1)
+  const opacity = useSharedValue(0)
+  const translateY = useSharedValue(0)
+
+  useEffect(() => {
+    scale.value = withSpring(focused ? 1.08 : 1)
+    opacity.value = withTiming(focused ? 1 : 0, {
+      duration: 180,
+    })
+    translateY.value = withSpring(focused ? -3 : 0)
+  }, [focused])
+
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [
       {
-        scale: withTiming(focused ? 1.08 : 1, {
-          duration: 180,
-        }),
+        scale: scale.value,
+      },
+      {
+        translateY: translateY.value,
       },
     ],
+  }))
+
+  const animatedBackground = useAnimatedStyle(() => ({
+    opacity: opacity.value,
   }))
 
   return (
@@ -30,15 +53,18 @@ export default function TabItem({ tab, focused, onPress, onLongPress }: TabItemP
       onLongPress={onLongPress}
       hitSlop={8}
     >
-      <Animated.View
-        style={[styles.container, focused && styles.activeContainer, animatedStyle]}
-      >
+      <Animated.View style={[styles.container, animatedStyle]}>
+        <Animated.View
+          pointerEvents="none"
+          style={[styles.activeBackground, animatedBackground]}
+        />
+
         <Icon
           name={tab.icon}
           color={focused ? THEME.colors.SECONDARY : THEME.colors.TEXT_PRIMARY}
         />
 
-        <StyledText style={[styles.label, focused && styles.activeLabel]}>
+        <StyledText variant="tab" style={[styles.label, focused && styles.activeLabel]}>
           {tab.title}
         </StyledText>
       </Animated.View>
@@ -53,23 +79,28 @@ const styles = StyleSheet.create({
   },
 
   container: {
+    position: 'relative',
+    overflow: 'hidden',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-
-    paddingHorizontal: 16,
-    paddingVertical: 10,
-
-    borderRadius: 18,
+    paddingHorizontal: 20,
+    paddingVertical: 3,
+    borderRadius: 25,
   },
-
-  activeContainer: {
+  activeBackground: {
     backgroundColor: THEME.colors.BUTTON_PRIMARY_ACTIVE,
-  },
+    position: 'absolute',
 
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+
+    borderRadius: 25,
+  },
   label: {
-    marginLeft: 8,
-    color: THEME.colors.TEXT_PRIMARY,
+    color: THEME.colors.TEXT_PRIMARY, // Цвета  и текст не анимация
   },
 
   activeLabel: {

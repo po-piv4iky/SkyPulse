@@ -1,7 +1,7 @@
 import { THEME } from '@/shared/theme'
 import { Tabs } from 'expo-router'
 import { StyleSheet, View } from 'react-native'
-import { tabs } from '../tabs'
+import { TabName, tabsMap } from '../tabs'
 import TabItem from './TabItem'
 
 type CustomTabBarProps = Parameters<
@@ -11,12 +11,9 @@ type CustomTabBarProps = Parameters<
 export default function CustomTabBar({ state, navigation }: CustomTabBarProps) {
   return (
     <View style={styles.container}>
-      {tabs.map((tab) => {
-        const route = state.routes.find((r) => r.name === tab.name)
-
-        if (!route) return null
-
-        const focused = state.index === state.routes.findIndex((r) => r.name === tab.name)
+      {state.routes.map((route, index) => {
+        const focused = state.index === index
+        const tab = tabsMap[route.name as TabName]
 
         const onPress = () => {
           const event = navigation.emit({
@@ -57,17 +54,16 @@ const styles = StyleSheet.create({
 
     left: 16,
     right: 16,
-    bottom: 20,
-
+    bottom: 30,
     height: 68,
 
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
 
-    borderRadius: 22,
+    borderRadius: 50,
 
-    paddingHorizontal: 12,
+    paddingHorizontal: 4,
 
     backgroundColor: THEME.colors.BG_SECONDARY,
 

@@ -10,4 +10,9 @@ export const TYPOGRAPHY = StyleSheet.create({
     fontSize: 16,
     fontWeight: '400',
   },
+  TAB_LABEL: {
+    fontSize: 11,
+    fontWeight: '500',
+    lineHeight: 14,
+  },
 })
