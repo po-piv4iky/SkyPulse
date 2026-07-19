@@ -9,7 +9,8 @@ import Animated, {
   withSpring,
   withTiming,
 } from 'react-native-reanimated'
-import { Tab } from '../tabs'
+import { Tab } from './tabs'
+
 
 interface TabItemProps {
   tab: Tab

@@ -1,8 +1,9 @@
 import { THEME } from '@/shared/theme'
 import { Tabs } from 'expo-router'
 import { StyleSheet, View } from 'react-native'
-import { TabName, tabsMap } from '../tabs'
+import { TabName, tabsMap } from './tabs'
 import TabItem from './TabItem'
+
 
 type CustomTabBarProps = Parameters<
   NonNullable<React.ComponentProps<typeof Tabs>['tabBar']>

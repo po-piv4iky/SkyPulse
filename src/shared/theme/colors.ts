@@ -27,4 +27,8 @@ export const COLORS = {
   BORDER: '#859397',
   ERROR: '#ffb4ab',
   WHITE: '#FFFF',
+  OVERLAY: {
+    dark: 'rgba(0,0,0,0.05)',
+    light: 'rgba(255,255,255,0.1)',
+  },
 }

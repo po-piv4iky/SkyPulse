@@ -1,11 +1,11 @@
-import GradientBackground from '@/shared/components/GradientBackground/GradientBackground'
+import ScreenLayout from '@/shared/components/Layout/ScreenLayout'
 import { StyleSheet, Text } from 'react-native'
 
 export default function Home() {
   return (
-    <GradientBackground style={styles.container}>
+    <ScreenLayout>
       <Text>Home</Text>
-    </GradientBackground>
+    </ScreenLayout>
   )
 }
 

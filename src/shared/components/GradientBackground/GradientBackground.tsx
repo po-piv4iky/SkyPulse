@@ -1,6 +1,5 @@
 import { THEME } from '@/shared/theme'
 import { LinearGradient, LinearGradientProps } from 'expo-linear-gradient'
-import { StyleSheet } from 'react-native'
 
 type GradientBackgroundProps = Omit<LinearGradientProps, 'colors'> & {
   colors?: LinearGradientProps['colors']
@@ -15,20 +14,8 @@ export default function GradientBackground({
   ...props
 }: GradientBackgroundProps) {
   return (
-    <LinearGradient
-      colors={colors}
-      start={start}
-      end={end}
-      style={[styles.container, style]}
-      {...props}
-    >
+    <LinearGradient colors={colors} start={start} end={end} style={[style]} {...props}>
       {children}
     </LinearGradient>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-})

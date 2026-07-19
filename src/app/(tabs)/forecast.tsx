@@ -1,16 +1,17 @@
-import GradientBackground from '@/shared/components/GradientBackground/GradientBackground'
+import ScreenLayout from '@/shared/components/Layout/ScreenLayout'
 import { StyleSheet, Text } from 'react-native'
 
 export default function Forecast() {
   return (
-    <GradientBackground style={styles.container}>
+    <ScreenLayout>
       <Text>Forecast</Text>
-    </GradientBackground>
+    </ScreenLayout>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },
