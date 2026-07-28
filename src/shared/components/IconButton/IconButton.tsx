@@ -6,6 +6,7 @@ type IconButtonProps = PressableProps & {
   name: React.ComponentProps<typeof Ionicons>['name']
   size?: 'small' | 'default' | 'large'
   style?: StyleProp<ViewStyle>
+  color?: 'primary' | 'tertiary'
 }
 
 const SIZE_MAP = {
@@ -24,9 +25,14 @@ export default function IconButton({
   name,
   size = 'default',
   style,
+  color = 'primary',
   ...props
 }: IconButtonProps) {
   const buttonSize = SIZE_MAP[size]
+  const iconColor = {
+    primary: THEME.colors.TEXT_PRIMARY,
+    tertiary: THEME.colors.TEXT_TERTIARY,
+  }
 
   return (
     <Pressable
@@ -42,14 +48,13 @@ export default function IconButton({
       ]}
       {...props}
     >
-      <Ionicons name={name} size={ICON_SIZE_MAP[size]} color={THEME.colors.WHITE} />
+      <Ionicons name={name} size={ICON_SIZE_MAP[size]} color={iconColor[color]} />
     </Pressable>
   )
 }
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: THEME.colors.SURFACE_CONTAINER_HIGH,
     alignItems: 'center',
     justifyContent: 'center',
   },

@@ -8,7 +8,7 @@ export default function StyledInput({ placeholder, ...props }: StyledInputProps)
     <TextInput
       style={[styles.input, props.style]}
       placeholder={placeholder}
-      placeholderTextColor={THEME.colors.TEXT_SECONDARY}
+      placeholderTextColor={THEME.colors.PLACEHOLDER}
       {...props}
     />
   )
@@ -16,7 +16,6 @@ export default function StyledInput({ placeholder, ...props }: StyledInputProps)
 
 const styles = StyleSheet.create({
   input: {
-    color: THEME.colors.SURFACE,
     fontSize: 16,
   },
 })

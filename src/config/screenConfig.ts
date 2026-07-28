@@ -1,16 +1,27 @@
 import { THEME } from '@/shared/theme'
+import { Ionicons } from '@expo/vector-icons'
+
+type ScreenConfig = {
+  title: string
+  showSearch: boolean
+  showLocation: boolean
+  iconName?: React.ComponentProps<typeof Ionicons>['name']
+  gradient: readonly string[]
+}
 
 export const SCREEN_CONFIG = {
   '/': {
-    title: 'Location',
+    title: 'Current Location',
     showSearch: true,
+    iconName: 'location-outline',
     showLocation: true,
     gradient: THEME.gradients.BACKGROUND,
   },
 
   '/forecast': {
-    title: 'Location',
+    title: 'Current Location',
     showSearch: true,
+    iconName: 'location-outline',
     showLocation: true,
     gradient: THEME.gradients.BACKGROUND_SECONDARY,
   },
@@ -18,6 +29,7 @@ export const SCREEN_CONFIG = {
   '/save': {
     title: 'Saved Cities',
     showSearch: true,
+    iconName: 'location-outline',
     showLocation: false,
     gradient: THEME.gradients.BACKGROUND,
   },
@@ -25,9 +37,13 @@ export const SCREEN_CONFIG = {
   '/settings': {
     title: 'Settings',
     showSearch: false,
+    iconName: undefined ,
     showLocation: false,
     gradient: THEME.gradients.BACKGROUND_TERTIARY,
   },
-} as const
+} satisfies Record<string, ScreenConfig>
 
-// без as const если написать typeof SCREEN_CONFIG выведет title: string..., а с as const строгий лдитеральный тип
+// satisfies сделдаети точные значения не просто string
+// {
+//   [key: string]: ScreenConfig
+// }

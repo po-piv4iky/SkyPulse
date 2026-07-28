@@ -2,8 +2,15 @@ import { StyleSheet } from 'react-native'
 
 export const TYPOGRAPHY = StyleSheet.create({
   HEADLINE_LG: {
+    // большой заголовок
     fontSize: 32,
     fontWeight: '600',
+  },
+
+  HEADLINE_MD: {
+    // // средний заголовок
+    fontSize: 26,
+    fontWeight: '500',
   },
 
   BODY_MD: {
