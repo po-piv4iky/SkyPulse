@@ -1,5 +1,7 @@
 import { SCREEN_CONFIG } from '@/config/screenConfig'
 
+import { useLocationStore } from '@/features/location/store/locationStore'
+import { useWeatherStore } from '@/features/weather/store/weatherStore'
 import IconButton from '@/shared/components/IconButton/IconButton'
 import { THEME } from '@/shared/theme'
 import { useRouter } from 'expo-router'
@@ -11,13 +13,17 @@ type HeaderProps = {
 }
 
 export default function Header({ config }: HeaderProps) {
+  const loadLocation = useLocationStore((s) => s.loadLocation)
+  const weather = useWeatherStore((s) => s.weather)
+  const city = weather?.name
+  const title = config.showLocation ? (city ?? config.title) : config.title
   const router = useRouter()
   const handleSearchPress = () => {
     router.push('/search')
   }
   return (
     <View style={styles.container}>
-      <HeaderLeft title={config.title} iconName={config.iconName} />
+      <HeaderLeft title={title} iconName={config.iconName} onIconPress={loadLocation} />
       {config.showSearch && <IconButton name="search" onPress={handleSearchPress} />}
     </View>
   )

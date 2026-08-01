@@ -6,6 +6,12 @@ export const TYPOGRAPHY = StyleSheet.create({
     fontSize: 32,
     fontWeight: '600',
   },
+  HEADLINE_XL: {
+    fontSize: 42,
+    fontWeight: '600', // или '700' для жирного
+    lineHeight: 48, // ~1.14 от размера шрифта
+    letterSpacing: -0.5, // чуть плотнее для больших заголовков
+  },
 
   HEADLINE_MD: {
     // // средний заголовок

@@ -1,0 +1,5 @@
+export const formatTime = (dt: number) =>
+  new Intl.DateTimeFormat('en-US', {
+    hour: '2-digit',
+    minute: '2-digit',
+  }).format(new Date(dt * 1000))

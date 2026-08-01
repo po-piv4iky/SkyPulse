@@ -1,17 +1,26 @@
 import Icon from '@/shared/components/Icon/Icon'
+import IconButton from '@/shared/components/IconButton/IconButton'
 import StyledText from '@/shared/components/StyledText/StyledTex'
-import { Ionicons } from '@expo/vector-icons'
 import { StyleSheet, View } from 'react-native'
 
 type HeaderLeftProps = {
   title: string
-  iconName?: React.ComponentProps<typeof Icon>['name'];
+  iconName?: React.ComponentProps<typeof Icon>['name']
+  onIconPress?: () => void
 }
 
-export default function HeaderLeft({ title, iconName }: HeaderLeftProps) {
+export default function HeaderLeft({ title, iconName, onIconPress }: HeaderLeftProps) {
   return (
     <View style={styles.titleContainer}>
-      {iconName && <Icon name={iconName} size="large" />}
+      {iconName && (
+        <IconButton
+          name={iconName}
+          color="tertiary"
+          size="large"
+          iconSize={36}
+          onPress={onIconPress}
+        />
+      )}
       <StyledText variant="headlineLg">{title}</StyledText>
     </View>
   )

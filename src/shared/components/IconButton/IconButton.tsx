@@ -5,6 +5,7 @@ import { Pressable, PressableProps, StyleProp, StyleSheet, ViewStyle } from 'rea
 type IconButtonProps = PressableProps & {
   name: React.ComponentProps<typeof Ionicons>['name']
   size?: 'small' | 'default' | 'large'
+  iconSize?: number
   style?: StyleProp<ViewStyle>
   color?: 'primary' | 'tertiary'
 }
@@ -21,18 +22,20 @@ const ICON_SIZE_MAP = {
   large: 28,
 } as const
 
+const COLOR_MAP = {
+  primary: THEME.colors.TEXT_PRIMARY,
+  tertiary: THEME.colors.TEXT_TERTIARY,
+} as const
+
 export default function IconButton({
   name,
   size = 'default',
+  iconSize,
   style,
   color = 'primary',
   ...props
 }: IconButtonProps) {
   const buttonSize = SIZE_MAP[size]
-  const iconColor = {
-    primary: THEME.colors.TEXT_PRIMARY,
-    tertiary: THEME.colors.TEXT_TERTIARY,
-  }
 
   return (
     <Pressable
@@ -46,9 +49,14 @@ export default function IconButton({
         },
         style,
       ]}
+      hitSlop={8}
       {...props}
     >
-      <Ionicons name={name} size={ICON_SIZE_MAP[size]} color={iconColor[color]} />
+      <Ionicons
+        name={name}
+        size={iconSize ?? ICON_SIZE_MAP[size]}
+        color={COLOR_MAP[color]}
+      />
     </Pressable>
   )
 }

@@ -19,10 +19,10 @@ export const SCREEN_CONFIG = {
   },
 
   '/forecast': {
-    title: 'Current Location',
+    title: 'Current City',
     showSearch: true,
     iconName: 'location-outline',
-    showLocation: true,
+    showLocation: false,
     gradient: THEME.gradients.BACKGROUND_SECONDARY,
   },
 
@@ -37,7 +37,7 @@ export const SCREEN_CONFIG = {
   '/settings': {
     title: 'Settings',
     showSearch: false,
-    iconName: undefined ,
+    iconName: undefined,
     showLocation: false,
     gradient: THEME.gradients.BACKGROUND_TERTIARY,
   },

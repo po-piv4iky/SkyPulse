@@ -1,7 +1,9 @@
 import { Stack } from 'expo-router'
 import { StatusBar } from 'react-native'
+import { useInitializeApp } from '../hooks/useInitializeApp'
 
 export default function RootLayout() {
+  useInitializeApp()
   return (
     <>
       <StatusBar barStyle="light-content" backgroundColor="transparent" translucent />
