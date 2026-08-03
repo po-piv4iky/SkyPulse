@@ -30,7 +30,11 @@ export const COLORS = {
   ERROR: '#ffb4ab',
   WHITE: '#FFFF',
   OVERLAY: {
-    dark: 'rgba(0,0,0,0.05)',
-    light: 'rgba(255,255,255,0.1)',
+    light: 'rgba(255,255,255,0.08)',
+
+    dark: 'rgba(0,0,0,0.05)', // почти прозрачный
+    darkMedium: 'rgba(0,0,0,0.12)', // оптимально для карточек
+    darkStrong: 'rgba(0,0,0,0.20)', // хорошо выделяет блок
+    darkHeavy: 'rgba(0,0,0,0.30)', // для модальных окон
   },
 }

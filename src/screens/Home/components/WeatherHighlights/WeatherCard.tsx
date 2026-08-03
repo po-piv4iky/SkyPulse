@@ -1,8 +1,8 @@
+import Card from '@/shared/components/Card/Card'
 import Icon from '@/shared/components/Icon/Icon'
 import StyledText from '@/shared/components/StyledText/StyledTex'
-import { THEME } from '@/shared/theme'
 import { Ionicons } from '@expo/vector-icons'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet } from 'react-native'
 
 interface Props {
   title: string
@@ -12,11 +12,11 @@ interface Props {
 
 export default function WeatherCard({ title, value, icon }: Props) {
   return (
-    <View style={styles.card}>
+    <Card style={styles.card} background="dark">
       <Icon name={icon}></Icon>
       <StyledText>{title}</StyledText>
       <StyledText>{value}</StyledText>
-    </View>
+    </Card>
   )
 }
 
@@ -24,10 +24,5 @@ const styles = StyleSheet.create({
   card: {
     width: '48%',
     aspectRatio: 1.1,
-    borderRadius: 20,
-    padding: 18,
-    backgroundColor: THEME.colors.BG_SECONDARY,
-    borderWidth: 0.3,
-    borderColor: THEME.colors.BORDER,
   },
 })

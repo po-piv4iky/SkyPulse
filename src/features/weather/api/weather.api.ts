@@ -9,12 +9,3 @@ export const getCurrentWeather = async (coords: Coord): Promise<WeatherResponse>
   return data
 }
 
-// export const searchCity = async (cityName: string) => {
-//   const response = await geoClient.get<GeoResponse>('/direct', {
-//     params: {
-//       q: cityName,
-//       limit: 5,
-//     },
-//   })
-//   return response.data
-// }

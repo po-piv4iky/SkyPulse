@@ -1,3 +1,4 @@
+import { useSearchStore } from '@/features/search/store/searchStore'
 import IconButton from '@/shared/components/IconButton/IconButton'
 import { useRouter } from 'expo-router'
 import { useEffect, useState } from 'react'
@@ -13,6 +14,17 @@ export default function HeaderSearch() {
   const [text, setText] = useState('')
   const opacity = useSharedValue(0)
   const translateX = useSharedValue(20)
+  const setQuery = useSearchStore((s) => s.setQuery)
+  const search = useSearchStore((s) => s.search)
+
+  useEffect(() => {
+    setQuery(text)
+    const timer = setTimeout(() => {
+      search(text)
+    }, 800)
+    return () => clearTimeout(timer)
+  }, [text, setQuery, search])
+
   useEffect(() => {
     if (text.length > 0) {
       opacity.value = withTiming(1, { duration: 180 })
@@ -29,7 +41,7 @@ export default function HeaderSearch() {
 
   const router = useRouter()
   const handleBackHome = () => {
-    router.push('/')
+    router.back()
   }
   return (
     <View style={styles.searchContainer}>
