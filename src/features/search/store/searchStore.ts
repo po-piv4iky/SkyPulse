@@ -1,41 +1,35 @@
-import { GeoLocation } from '@/features/weather/types/weather.api'
+import { getCurrentWeather } from '@/features/weather/api/weather.api'
 import { create } from 'zustand'
 import { searchCity } from '../api/searchCity'
+import { SearchResult } from '../types/search.types'
+import { mapSearchResult } from '../utils/mapSearchResult'
 
 interface SearchStore {
-  query: string
-  results: GeoLocation[]
+  results: SearchResult[]
   isLoading: boolean
   error: string | null
 
-  setQuery: (query: string) => void
   search: (query: string) => Promise<void>
 }
 
 export const useSearchStore = create<SearchStore>((set) => ({
-  query: '',
   results: [],
   isLoading: false,
   error: null,
 
-  setQuery: (query) => {
-    set({ query })
-  },
   search: async (query) => {
-    if (!query.trim()) {
-      set({
-        results: [],
-        isLoading: false,
-        error: null,
-      })
-      return
-    }
     set({ isLoading: true, error: null })
     try {
       const cities = await searchCity(query)
-      set({ results: cities })
+      const results = await Promise.all(
+        cities.map(async (city) => {
+          const weather = await getCurrentWeather(city.lat, city.lon)
+          return mapSearchResult(weather, city)
+        }),
+      )
+      set({ results, error: null })
     } catch {
-      set({ error: 'Не удалось найти город' })
+      set({ results: [], error: 'Не удалось найти город' })
     } finally {
       set({
         isLoading: false,

@@ -4,20 +4,29 @@ import { Text, TextProps } from 'react-native'
 
 interface StyledTextProps extends TextProps {
   color?: 'primary' | 'secondary' | 'error'
-  variant?: 'headlineXl' | 'headlineLg' | 'headlineMd' | 'body' | 'tab'
+  variant?:
+    | 'displayXl'
+    | 'headlineLg'
+    | 'headlineMd'
+    | 'titleMd'
+    | 'bodyMd'
+    | 'bodySm'
+    | 'labelSm'
 }
 
 const typographyStyles = {
-  headlineXl: TYPOGRAPHY.HEADLINE_XL,
+  displayXl: TYPOGRAPHY.DISPLAY_XL,
   headlineLg: TYPOGRAPHY.HEADLINE_LG,
   headlineMd: TYPOGRAPHY.HEADLINE_MD,
-  body: TYPOGRAPHY.BODY_MD,
-  tab: TYPOGRAPHY.TAB_LABEL,
+  titleMd: TYPOGRAPHY.TITLE_MD,
+  bodyMd: TYPOGRAPHY.BODY_MD,
+  bodySm: TYPOGRAPHY.BODY_SM,
+  labelSm: TYPOGRAPHY.LABEL_SM,
 }
 export default function StyledText({
   children,
   color = 'primary',
-  variant = 'body',
+  variant = 'bodyMd',
   style,
   ...props
 }: StyledTextProps) {

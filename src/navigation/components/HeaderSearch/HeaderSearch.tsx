@@ -14,16 +14,14 @@ export default function HeaderSearch() {
   const [text, setText] = useState('')
   const opacity = useSharedValue(0)
   const translateX = useSharedValue(20)
-  const setQuery = useSearchStore((s) => s.setQuery)
   const search = useSearchStore((s) => s.search)
 
   useEffect(() => {
-    setQuery(text)
     const timer = setTimeout(() => {
       search(text)
     }, 800)
     return () => clearTimeout(timer)
-  }, [text, setQuery, search])
+  }, [text, search])
 
   useEffect(() => {
     if (text.length > 0) {

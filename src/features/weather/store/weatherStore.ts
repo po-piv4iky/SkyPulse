@@ -1,7 +1,7 @@
 import { Coord } from '@/features/location/types'
 import { create } from 'zustand'
 import { getCurrentWeather } from '../api/weather.api'
-import { WeatherResponse } from '../types/weather.api'
+import { WeatherResponse } from '../types/weather.types'
 
 interface WeatherStore {
   weather: WeatherResponse | null
@@ -16,7 +16,7 @@ export const useWeatherStore = create<WeatherStore>((set) => ({
   error: null,
   loadWeather: async (coords) => {
     try {
-      const weather = await getCurrentWeather(coords)
+      const weather = await getCurrentWeather(coords.latitude, coords.longitude)
       set({ weather: weather })
     } catch {
       set({ error: 'Не удалось загрузить погоду' })

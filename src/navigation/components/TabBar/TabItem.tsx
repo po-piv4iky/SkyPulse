@@ -11,7 +11,6 @@ import Animated, {
 } from 'react-native-reanimated'
 import { Tab } from './tabs'
 
-
 interface TabItemProps {
   tab: Tab
   focused: boolean
@@ -65,7 +64,10 @@ export default function TabItem({ tab, focused, onPress, onLongPress }: TabItemP
           color={focused ? THEME.colors.SECONDARY : THEME.colors.TEXT_PRIMARY}
         />
 
-        <StyledText variant="tab" style={[styles.label, focused && styles.activeLabel]}>
+        <StyledText
+          variant="labelSm"
+          style={[styles.label, focused && styles.activeLabel]}
+        >
           {tab.title}
         </StyledText>
       </Animated.View>

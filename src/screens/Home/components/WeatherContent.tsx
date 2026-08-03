@@ -24,7 +24,7 @@ export default function WeatherContent() {
         />
       )}
 
-      <StyledText variant="headlineXl" style={styles.temperature}>
+      <StyledText variant="displayXl" style={styles.temperature}>
         {Math.round(weather.feelsLike)}°
       </StyledText>
 
